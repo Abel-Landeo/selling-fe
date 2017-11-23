@@ -7,3 +7,21 @@
 	float: none;
 	margin: 0 auto;
 }
+
+.btn:hover{
+	background-color: red;
+}
+
+.main-title{
+	color: #FFD500;
+	font-size: 20px;
+}
+
+.form label{
+	color: white;
+}
+
+.form .btn-default{
+	background-color: #FFC927;
+	font-size: 14px;
+}

@@ -6,9 +6,9 @@
 		<div class="col-sm-4">
 			<div class="well well-sm">
 				<div class="btn-group centered">
-					<button type="button" class="btn btn-default btn-lg">Paquetes</button>
-					<button type="button" class="btn btn-default btn-lg">Hoteles</button>
-					<button type="button" class="btn btn-default btn-lg">Autos</button>
+					<a routerLink="/dashboard" class="btn btn-default btn-lg">Dashboard</a>
+					<a routerLink="/hoteles" class="btn btn-default btn-lg">Hoteles</a>
+					<a routerLink="/autos" class="btn btn-default btn-lg">Autos</a>
 				</div>
 			</div>
 		</div>
@@ -22,6 +22,5 @@
 		</div>
 	</div>
 </div>
-<div class="well well-lg app-colored">
-	general filters		
-</div>
+<router-outlet></router-outlet>
+
