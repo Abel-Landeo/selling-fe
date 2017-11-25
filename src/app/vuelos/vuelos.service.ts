@@ -21,11 +21,16 @@ const body = {
 export class VuelosService {
 
 	private vuelosUrl = 'http://app-unmsm-travel.cfapps.io/find-flights';
+	private citiesUrl = 'http://app-unmsm-travel.cfapps.io/all-destination';
 
 	constructor(private http: HttpClient) {}
 
 	postData(): Observable<Response>{
 		return this.http.post<Response>(this.vuelosUrl, body, httpOptions);
+	}
+
+	getCities(): Observable<Response>{
+		return this.http.get<Response>(this.citiesUrl, httpOptions);
 	}
 }
 

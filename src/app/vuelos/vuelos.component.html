@@ -12,7 +12,9 @@
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label for="idFHRecojo">Destino:</label>
-						<input type="input" class="form-control" id="idFHRecojo" placeholder="ingrese F y H recojo">
+						<select class="form-control" [(ngModel)]="selectedCity" name="city">
+							<option *ngFor="let c of cities" [ngValue]="c">{{ c.description }}</option>
+						</select>
 					</div>
 				</div>
 				<div class="col-sm-3">

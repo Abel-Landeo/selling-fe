@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VuelosService } from './vuelos.service';
+import { City } from './city.model';
 
 @Component({
 	selector: 'app-vuelos',
@@ -8,11 +9,17 @@ import { VuelosService } from './vuelos.service';
 })
 export class VuelosComponent implements OnInit {
 
-	clickMessage: string;
+	selectedCity: City;
+	cities: City[];
 
 	constructor(private vuelosService: VuelosService) { }
 
-	ngOnInit() { }
+	ngOnInit() { 
+		this.vuelosService.getCities()
+		.subscribe(resp => {
+			this.cities = resp.lista as City[];
+		});
+	}
 
 	findButton(): void{
 		this.vuelosService.postData()
