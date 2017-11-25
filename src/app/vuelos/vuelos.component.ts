@@ -20,6 +20,7 @@ export class VuelosComponent implements OnInit {
 	resp: Response;
 	oneWay: boolean;
 	codeProvider: string;
+	msg: string;
 	
 	constructor(private vuelosService: VuelosService) { }
 
@@ -35,10 +36,12 @@ export class VuelosComponent implements OnInit {
 			if (err.error instanceof Error) {
 				// A client-side or network error occurred. Handle it accordingly.
 				console.log('An error occurred:', err.error.message);
+				this.msg = 'Something just went wrong, try refreshing the page please. Peace and Love';
 			} else {
 				// The backend returned an unsuccessful response code.
 				// The response body may contain clues as to what went wrong,
 				console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+				this.msg = 'Apparently the service is not available for now, we will solve it soon. Come back later :)';
 			}
 		});
 	}
@@ -67,6 +70,7 @@ export class VuelosComponent implements OnInit {
 		this.returnDate = '2017-12-20';
 		this.oneWay = false;
 		this.codeProvider = 'AM';
+		this.msg = 'Search is ready';
 	}
 
 }
