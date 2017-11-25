@@ -1,0 +1,31 @@
+<div class="well well-lg app-colored">
+	<div class="container">
+		<p class="main-title">Las mejores ofertas en vuelos</p>
+		<form class="form" novalidate>
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="idDestino">Origen:</label>
+						<input type="input" class="form-control" id="idDestino" placeholder="ingresa tu destino">
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="idFHRecojo">Destino:</label>
+						<input type="input" class="form-control" id="idFHRecojo" placeholder="ingrese F y H recojo">
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="idFHDevolucion">Fecha y Hora de partida:</label>
+						<input type="input" class="form-control" id="idFHDevolucion" placeholder="ingrese F y H de devolucion">
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<br>
+					<input type="button" (click)="findButton()" class="btn btn-default" value="Buscar">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
