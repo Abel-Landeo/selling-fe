@@ -6,28 +6,60 @@
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label for="idDestino">Origen:</label>
-						<input type="input" class="form-control" id="idDestino" placeholder="ingresa tu destino">
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="form-group">
-						<label for="idFHRecojo">Destino:</label>
-						<select class="form-control" [(ngModel)]="selectedCity" name="city">
+						<select class="form-control" [(ngModel)]="originCity" name="originCity">
 							<option *ngFor="let c of cities" [ngValue]="c">{{ c.description }}</option>
 						</select>
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label for="idFHDevolucion">Fecha y Hora de partida:</label>
-						<input type="input" class="form-control" id="idFHDevolucion" placeholder="ingrese F y H de devolucion">
+						<label for="idFHRecojo">Destino:</label>
+						<select class="form-control" [(ngModel)]="destinyCity" name="destinyCity">
+							<option *ngFor="let c of cities" [ngValue]="c">{{ c.description }}</option>
+						</select>
 					</div>
 				</div>
-				<div class="col-sm-3">
+				<div class="col-sm-2">
+					<div class="form-group">
+						<label for="departureDate">departure date</label>
+						<input type="input" class="form-control" id="departureDate" placeholder="departureDate" [(ngModel)]="departureDate" name="departureDate">
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-group">
+						<label for="returnDate">return date</label>
+						<input type="input" class="form-control" id="returnDate" placeholder="returnDate" [(ngModel)]="returnDate" name="returnDate">
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<label>One way</label> <input type="checkbox" [(ngModel)]="oneWay" name="oneWay">
 					<br>
-					<input type="button" (click)="findButton()" class="btn btn-default" value="Buscar">
+					<input type="button" (click)="findButton()" class="btn btn-default" value="Search">
 				</div>
 			</div>
 		</form>
 	</div>
+</div>
+<div class="container">
+	<table class="table table-hover" *ngIf="resp !== null; else elseBlock">
+		<thead>
+			<tr>
+				<th>Destino</th>
+				<th>Departiture Date</th>
+				<th>Return Date</th>
+				<th>Price</th>
+				<th>Airline</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of resp.lista">
+				<td>{{ item.destination }}</td>
+				<td>{{ item.departureDate }}</td>
+				<td>{{ item.returnDate }}</td>
+				<td>{{ item.price }}</td>
+				<td>{{ item.airline }}</td>
+			</tr>
+		</tbody>
+	</table>
+	<ng-template #elseBlock>Press Buscar</ng-template>
 </div>

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+
 import { VuelosService } from './vuelos.service';
 import { City } from './city.model';
+import { Response } from './response.model';
 
 @Component({
 	selector: 'app-vuelos',
@@ -9,23 +12,61 @@ import { City } from './city.model';
 })
 export class VuelosComponent implements OnInit {
 
-	selectedCity: City;
+	destinyCity: City;
+	originCity: City;
+	departureDate: string;
+	returnDate: string;
 	cities: City[];
-
+	resp: Response;
+	oneWay: boolean;
+	codeProvider: string;
+	
 	constructor(private vuelosService: VuelosService) { }
 
 	ngOnInit() { 
+		this.resp = null;
 		this.vuelosService.getCities()
-		.subscribe(resp => {
+		.subscribe(
+		resp => {
 			this.cities = resp.lista as City[];
+			this.initForm();
+		},
+		(err: HttpErrorResponse) => {
+			if (err.error instanceof Error) {
+				// A client-side or network error occurred. Handle it accordingly.
+				console.log('An error occurred:', err.error.message);
+			} else {
+				// The backend returned an unsuccessful response code.
+				// The response body may contain clues as to what went wrong,
+				console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+			}
 		});
 	}
 
 	findButton(): void{
-		this.vuelosService.postData()
+		const payload = {
+			"origin" : this.originCity.code,
+			"destination": this.destinyCity.code,
+			"departureDate" : this.departureDate,
+			"returnDate" : this.returnDate,
+			"oneWay" : this.oneWay?'true':'false',
+			"codeProvider" : this.codeProvider
+		};
+		this.vuelosService.postData(payload)
 		.subscribe(resp => {
-			console.log(resp);
+			this.resp = resp;
 		});
+	}
+
+	initForm():void {
+		for(let city of this.cities){
+			if (city.code === 'NYC') this.originCity = city;
+			if (city.code === 'LAX') this.destinyCity = city;
+		}
+		this.departureDate = '2017-12-16';
+		this.returnDate = '2017-12-20';
+		this.oneWay = false;
+		this.codeProvider = 'AM';
 	}
 
 }
